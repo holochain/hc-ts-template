@@ -1,0 +1,47 @@
+{
+  "Version": 1,
+  "UUID": "4a4beb46-a3cf-476f-8593-e30155186707",
+  "Name": "sampleApp",
+  "Properties": {
+    "description": "A sample app",
+    "language": "en"
+  },
+  "PropertiesSchemaFile": "properties_schema.json",
+  "DHTConfig": {
+    "HashType": "sha2-256"
+  },
+  "Zomes": [
+    {
+      "Name": "sampleZome",
+      "Description": "A sample zome",
+      "RibosomeType": "js",
+      "CodeFile": "sampleZome.js",
+      "Entries": [
+        {
+          "Name": "sampleEntry",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "sampleEntry.json"
+        },
+        {
+          "Name": "sampleLink",
+          "DataFormat": "links",
+          "Sharing": "public"
+        }
+      ],
+      "Functions": [
+        {
+          "Name": "sampleEntryCreate",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "sampleEntryList",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    }
+  ]
+}

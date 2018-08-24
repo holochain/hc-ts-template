@@ -5,8 +5,9 @@
   "proxy": "http://localhost:4141",
   "private": true,
   "scripts": {
-    "hc:build": "rm -r build/dna; tsc -p dna-src && cpx \"dna-src/**/*.json\" build/dna-src/ && mv build/dna-src build/dna",
-    "hc:build-win": "rm -r build/dna && tsc -p dna-src && cpx \"dna-src/**/*.json\" build/dna-src/ && mv build/dna-src build/dna",
+    "hc:build-common": "tsc -p dna-src && cpx \"dna-src/**/*.json\" build/dna",
+    "hc:build": "rm -r build/dna; npm run hc:build-common",
+    "hc:build-win": "rm -r build/dna & npm run hc:build-common",
     "hc:dev": "npm run hc:build && cd build && hcdev web",
     "hc:win": "npm run hc:build-win && cd build && hcdev web",
     "hc:test": "cp -r ./test/ ./build/test/ && cd build && hcdev test",

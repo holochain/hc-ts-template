@@ -1,6 +1,6 @@
 # Typescript + React + Redux + holochain-proto Template
 
-Use this template to quickly get up and running with a Typescript build system with hot reloading. DNA not included.
+Use this template to quickly get up and running with a Typescript build system with hot reloading.
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/holochain/hc-ts-template.svg)
 ![GitHub](https://img.shields.io/github/license/holochain/hc-ts-template.svg)

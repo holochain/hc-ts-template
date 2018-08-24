@@ -1,0 +1,13 @@
+{
+  "Tests": [
+    {
+      "Convey": "test for sampleEntryCreate",
+      "Zome": "sampleZome",
+      "FnName": "sampleEntryCreate",
+      "Input": {
+        "text": "hello"
+      },
+      "Output": "%h1%"
+    }
+  ]
+}
