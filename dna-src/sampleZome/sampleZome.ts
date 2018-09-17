@@ -8,7 +8,12 @@
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
 
-function sampleEntryCreate (entry) {
+/**
+ * Add a text string to the chain
+ * @param {String} entry 
+ * @return {String} hash
+ */
+const sampleEntryCreate =(entry:String):String=>{
   const hash = commit("sampleEntry", entry);
   commit("sampleLink", {
     Links: [
@@ -18,7 +23,12 @@ function sampleEntryCreate (entry) {
   return hash;
 }
 
-function sampleEntryList (sampleEntryHash) {
+/**
+ * Fetch a list of all text strings added to the chain
+ * @param {String} sampleEntryHash (Not used! Example)
+ * @return {Array<String>} Array of String links
+ */
+const sampleEntryList=(sampleEntryHash: String|null):Array<String>=> {
   return getLinks(App.Key.Hash, "text", {Load: true}).map(e => e.Entry);
 }
 
@@ -29,9 +39,9 @@ function sampleEntryList (sampleEntryHash) {
 
 /**
  * Called only when your source chain is generated
- * @return {boolean} success
+ * @return {Boolean} success
  */
-function genesis () {
+const genesis=():Boolean=> {
   return true;
 }
 
@@ -41,14 +51,14 @@ function genesis () {
 
 /**
  * Called to validate any changes to the local chain or DHT
- * @param {string} entryName - the type of entry
- * @param {*} entry - the entry data to be set
- * @param {object} header - header for the entry containing properties EntryLink, Time, and Type
- * @param {*} pkg - the extra data provided by the validate[X]Pkg methods
- * @param {object} sources - an array of strings containing the keys of any authors of this entry
- * @return {boolean} is valid?
+ * @param {String} entryName - the type of entry
+ * @param {any} entry - the entry data to be set
+ * @param {Header} header - header for the entry containing properties EntryLink, Time, and Type
+ * @param {PackageRequest} pkg - the extra data provided by the validate[X]Pkg methods
+ * @param {Array<String>} sources - an array of strings containing the keys of any authors of this entry
+ * @return {Boolean} is valid?
  */
-function validateCommit (entryName, entry, header, pkg, sources) {
+const validateCommit=(entryName:String, entry:any|null, header:Header|null, pkg:PackageRequest|null, sources:Array<String>|null):boolean=> {
   switch (entryName) {
     case "sampleEntry":
       // be sure to consider many edge cases for validating
@@ -63,14 +73,14 @@ function validateCommit (entryName, entry, header, pkg, sources) {
 
 /**
  * Called to validate any changes to the local chain or DHT
- * @param {string} entryName - the type of entry
- * @param {*} entry - the entry data to be set
- * @param {object} header - header for the entry containing properties EntryLink, Time, and Type
- * @param {*} pkg - the extra data provided by the validate[X]Pkg methods
- * @param {object} sources - an array of strings containing the keys of any authors of this entry
- * @return {boolean} is valid?
+ * @param {String} entryName - the type of entry
+ * @param {any} entry - the entry data to be set
+ * @param {Header} header - header for the entry containing properties EntryLink, Time, and Type
+ * @param {PackageRequest} pkg - the extra data provided by the validate[X]Pkg methods
+ * @param {Array<String>} sources - an array of strings containing the keys of any authors of this entry
+ * @return {Boolean} is valid?
  */
-function validatePut (entryName, entry, header, pkg, sources) {
+const validatePut=(entryName:String, entry:any|null, header:Header|null, pkg:PackageRequest|null, sources:Array<String>|null):Boolean=> {
   switch (entryName) {
     case "sampleEntry":
       // be sure to consider many edge cases for validating
@@ -85,15 +95,15 @@ function validatePut (entryName, entry, header, pkg, sources) {
 
 /**
  * Called to validate any changes to the local chain or DHT
- * @param {string} entryName - the type of entry
- * @param {*} entry - the entry data to be set
- * @param {object} header - header for the entry containing properties EntryLink, Time, and Type
- * @param {string} replaces - the hash for the entry being updated
- * @param {*} pkg - the extra data provided by the validate[X]Pkg methods
- * @param {object} sources - an array of strings containing the keys of any authors of this entry
- * @return {boolean} is valid?
+ * @param {String} entryName - the type of entry
+ * @param {any|null} entry - the entry data to be set
+ * @param {Header|null} header - header for the entry containing properties EntryLink, Time, and Type
+ * @param {String|null} replaces - the hash for the entry being updated
+ * @param {PackageRequest|null} pkg - the extra data provided by the validate[X]Pkg methods
+ * @param {Array<String>|null} sources - an array of strings containing the keys of any authors of this entry
+ * @return {Boolean} is valid?
  */
-function validateMod (entryName, entry, header, replaces, pkg, sources) {
+const validateMod=(entryName:String, entry:any|null, header:Header|null, replaces:String|null, pkg:PackageRequest|null, sources:Array<String>|null):Boolean=> {
   switch (entryName) {
     case "sampleEntry":
       // be sure to consider many edge cases for validating
@@ -108,13 +118,13 @@ function validateMod (entryName, entry, header, replaces, pkg, sources) {
 
 /**
  * Called to validate any changes to the local chain or DHT
- * @param {string} entryName - the type of entry
- * @param {string} hash - the hash of the entry to remove
- * @param {*} pkg - the extra data provided by the validate[X]Pkg methods
- * @param {object} sources - an array of strings containing the keys of any authors of this entry
- * @return {boolean} is valid?
+ * @param {String} entryName - the type of entry
+ * @param {String|null} hash - the hash of the entry to remove
+ * @param {PackageRequest|null} pkg - the extra data provided by the validate[X]Pkg methods
+ * @param {Array<String>|null} sources - an array of strings containing the keys of any authors of this entry
+ * @return {Boolean} is valid?
  */
-function validateDel (entryName, hash, pkg, sources) {
+const validateDel=(entryName:String, hash:String|null, pkg:PackageRequest|null, sources:Array<String>|null):Boolean=> {
   switch (entryName) {
     case "sampleEntry":
       // be sure to consider many edge cases for validating
@@ -129,14 +139,14 @@ function validateDel (entryName, hash, pkg, sources) {
 
 /**
  * Called to validate any changes to the local chain or DHT
- * @param {string} entryName - the type of entry
- * @param {string} baseHash - the hash of the base entry being linked
- * @param {?} links - ?
- * @param {*} pkg - the extra data provided by the validate[X]Pkg methods
- * @param {object} sources - an array of strings containing the keys of any authors of this entry
- * @return {boolean} is valid?
+ * @param {String} entryName - the type of entry
+ * @param {String|null} baseHash - the hash of the base entry being linked
+ * @param {Array<String>|null} links - Array of links
+ * @param {PackageRequest|null} pkg - the extra data provided by the validate[X]Pkg methods
+ * @param {Array<String>|null} sources - an array of strings containing the keys of any authors of this entry
+ * @return {Boolean} is valid?
  */
-function validateLink (entryName, baseHash, links, pkg, sources) {
+const validateLink=(entryName:String, baseHash:String|null, links:Array<String>|null, pkg:PackageRequest|null, sources:Array<String>|null):Boolean=> {
   switch (entryName) {
     case "sampleEntry":
       // be sure to consider many edge cases for validating
@@ -151,36 +161,36 @@ function validateLink (entryName, baseHash, links, pkg, sources) {
 
 /**
  * Called to get the data needed to validate
- * @param {string} entryName - the name of entry to validate
- * @return {*} the data required for validation
+ * @param {String} entryName - the name of entry to validate
+ * @return {null} the data required for validation
  */
-function validatePutPkg (entryName) {
+const validatePutPkg=(entryName:String):null=> {
   return null;
 }
 
 /**
  * Called to get the data needed to validate
- * @param {string} entryName - the name of entry to validate
- * @return {*} the data required for validation
+ * @param {String} entryName - the name of entry to validate
+ * @return {null} the data required for validation
  */
-function validateModPkg (entryName) {
+const validateModPkg=(entryName:String):null=> {
   return null;
 }
 
 /**
  * Called to get the data needed to validate
- * @param {string} entryName - the name of entry to validate
- * @return {*} the data required for validation
+ * @param {String} entryName - the name of entry to validate
+ * @return {null} the data required for validation
  */
-function validateDelPkg (entryName) {
+const validateDelPkg=(entryName:String):null=> {
   return null;
 }
 
 /**
  * Called to get the data needed to validate
- * @param {string} entryName - the name of entry to validate
- * @return {*} the data required for validation
+ * @param {String} entryName - the name of entry to validate
+ * @return {null} the data required for validation
  */
-function validateLinkPkg (entryName) {
+const validateLinkPkg=(entryName):null=> {
   return null;
 }
