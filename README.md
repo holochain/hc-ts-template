@@ -17,7 +17,11 @@ Ensure holochain-proto (at least version 26) is installed on your machine by run
 hcd -v
 ```
 
-Subsequent steps also assumes npm/yarn is installed.
+If you would like to install latest holochain-proto you can do it from [source](https://github.com/holochain/holochain-proto#go-based-install) or [download](https://github.com/holochain/holochain-proto/releases/) binaries.
+
+You will also need to have npm/yarn installed to run compiling scripts and development server.
+
+For Windows users we assume you're using [Git Bash](https://gitforwindows.org/).
 
 ### Installing
 
@@ -47,8 +51,8 @@ and opening the browser to http://localhost:4141
 If you would like to persist data between sessions install to the local holochain directory by running the following from the project root directory:
 ```
 hcadmin init <id/name string>
-hcadmin join ./build/ minesweeper
-hcd minesweeper
+hcadmin join ./build/ hc-ts-template
+hcd hc-ts-template
 ```
 
 ## Running the tests
